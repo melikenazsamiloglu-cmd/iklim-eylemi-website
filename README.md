@@ -61,7 +61,6 @@ Bireysel anket yanıtları ve zaman damgaları gizliliği korumak için yayımla
 - Isınma şeritlerinin renkleri kod içinde dönemlere göre belirlenmiştir; bunlar yıllık ölçülmüş sıcaklık anomalilerinin doğrudan görselleştirilmesi değildir.
 - Kampüs görüş formu, `type="button"` ile bir bilgilendirme penceresi açar; veri göndermez veya kaydetmez.
 - Site bir bilgilendirme/tasarım prototipidir; güncel ve doğrulanmış iklim istatistikleri için ilgili bilimsel kaynaklara başvurulmalıdır.
-- Haricî görsellerin yeniden yayımlama izinleri proje sahibi tarafından kontrol edilmelidir.
 
 ## Not
 
