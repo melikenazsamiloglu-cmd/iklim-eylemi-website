@@ -1,5 +1,7 @@
 # İklim Eylemi | Climate Action Website 🌱
 
+🌐 **Canlı Web Sitesi:** https://melikenazsamiloglu-cmd.github.io/iklim-eylemi-website/
+
 **İklim Eylemi**, Birleşmiş Milletler Sürdürülebilir Kalkınma Amaçları kapsamında **SKA 13 – İklim Eylemi** konusuna odaklanan, üniversite web tasarımı dersi için hazırlanmış çok sayfalı bir eğitim projesidir. Site; iklim değişikliği, hedefler, çevresel sorunlar ve çözüm önerilerini ziyaretçilere görsel ve etkileşimli bir arayüzle sunar.
 
 **Geliştiren:** Melike Naz Şamiloğlu  
