@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çözümler - İklim Eylemi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- Kaydırmada Ortaya Çıkma (Scroll Reveal) Animasyonu --- */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+        body { background-color: #f0fdf4; font-family: 'Inter', sans-serif; }
+        .nav-bg { background-color: #047857; } /* SKA 13 Koyu Yeşil */
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+   <!-- Navigasyon Çubuğu -->
+    <nav class="nav-bg sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo/Site Adı -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-3xl font-extrabold text-white tracking-wider hover:text-yellow-300 transition duration-300">İKLİM <span class="text-yellow-300">EYLEMİ</span></a>
+                </div>
+                <!-- Menü Bağlantıları (Masaüstü) -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2 lg:space-x-4">
+                        <a href="index.html" class="nav-link text-white bg-green-700 px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out transform">Ana Sayfa</a>
+                        <!-- LİNKLER: Sayfalar/klasörü altındaki dosyalara yönlendiriyor -->
+                        <a href="hedef.html" class="nav-link text-gray-100 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out transform">Hedef Hakkında</a>
+                        <a href="sorunlar.html" class="nav-link text-gray-100 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out transform">Sorunlar</a>
+                        <a href="cozumler.html" class="nav-link text-gray-100 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out transform">Çözümler</a>
+                        <a href="uni.html" class="nav-link text-yellow-300 hover:text-white px-3 py-2 rounded-lg text-sm font-bold transition duration-300 ease-in-out transform border-2 border-yellow-300 hover:border-white">Üniversitemizde Durum</a>
+                    </div>
+                </div>
+                <!-- Mobil Menü Butonu -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" type="button" class="bg-green-700 inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-800 focus:ring-white transition duration-150" aria-controls="mobile-menu" aria-expanded="false">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobil Menü İçeriği -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-green-800">
+                <a href="index.html" class="text-white bg-green-700 block px-3 py-2 rounded-md text-base font-medium transition duration-150">Ana Sayfa</a>
+                <a href="hedef.html" class="text-gray-200 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-150">Hedef Hakkında</a>
+                <a href="sorunlar.html" class="text-gray-200 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-150">Sorunlar</a>
+                <a href="cozumler.html" class="text-gray-200 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-150">Çözümler</a>
+                <a href="uni.html" class="text-yellow-300 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold transition duration-150">Üniversitemizde Durum</a>
+            </div>
+        </div>
+    </nav>
+    <main class="max-w-5xl mx-auto py-12 px-6">
+        <section class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border-t-8 border-green-600">
+            <h1 class="text-4xl font-black text-green-800 mb-8">2025 Sürdürülebilir Çözüm Yolları</h1>
+
+            <div class="mb-12 bg-green-50 p-6 rounded-2xl border border-green-100">
+                <h2 class="text-xl font-bold text-green-800 mb-4 text-center">Bireysel Eylemlerin Karbon Tasarrufu Oranları (%)</h2>
+                <div class="h-64">
+                    <canvas id="cozumGrafigi"></canvas>
+                </div>
+                <p class="text-xs text-center text-gray-500 mt-4 italic">Grafik 2: 2025 yılı verilerine göre yaşam tarzı değişikliklerinin emisyon azaltımına etkisi.</p>
+            </div>
+            
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold text-green-700">1. Yenilenebilir Enerjiye Geçiş</h3>
+                    <p class="text-gray-700 leading-relaxed">2025 yılında güneş ve rüzgar enerjisi maliyetleri fosil yakıtların altına düşmüştür. Evlerde ve kampüslerde mikro-şebekeler kurarak karbon ayak izimizi %60 oranında azaltabiliriz.</p>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold text-green-700">2. Dairesel Ekonomi ve Sıfır Atık</h3>
+                    <p class="text-gray-700 leading-relaxed">Üretim ve tüketim döngüsünü değiştirerek, atığı kaynağında yok etmeliyiz. Tek kullanımlık plastiklerin yerini biyoplastikler ve yeniden kullanılabilir sistemler almalı.</p>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold text-green-700">3. Yeşil Ulaşım ve Mobilite</h3>
+                    <p class="text-gray-700 leading-relaxed">Elektrikli araçlar ve toplu taşıma entegrasyonu ile ulaşım kaynaklı emisyonları minimize edebiliriz. Bisiklet yolları, 2025 şehir planlamasının merkezinde yer almalıdır.</p>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold text-green-700">4. Doğa Tabanlı Çözümler</h3>
+                    <p class="text-gray-700 leading-relaxed">Ormanlaştırma ve sulak alanların restorasyonu, atmosferdeki karbonun doğal yollarla tutulmasını sağlayan en etkili ve düşük maliyetli yöntemdir.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 p-10 bg-green-800 rounded-3xl text-center text-white shadow-xl">
+                <h2 class="text-3xl font-bold mb-4 italic">"Geleceği Isıtma, Eyleme Geç!"</h2>
+                <p class="text-green-200">#SKA13 #İklimEylemi2025</p>
+            </div>
+        </section>
+    </main>
+    <footer class="bg-emerald-900 text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-emerald-800 pb-10">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-black italic text-yellow-400">İKLİM EYLEMİ</h3>
+                    <p class="text-emerald-200 text-sm leading-relaxed">
+                        "Geleceği Isıtma, Eyleme Geç!" sloganıyla 2025 yılında daha yaşanabilir bir kampüs ve dünya!
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white uppercase tracking-wider">Site Haritası</h4>
+                    <ul class="text-emerald-300 text-sm space-y-2">
+                        <li><a href="index.html" class="hover:text-yellow-400">Ana Sayfa</a></li>
+                        <li><a href="hedef.html" class="hover:text-yellow-400">Hedef Hakkında</a></li>
+                        <li><a href="sorunlar.html" class="hover:text-yellow-400">Sorunlar</a></li>
+                        <li><a href="uni.html" class="hover:text-yellow-400">Üniverstemizde Durum</a></li>
+                        <li><a href="cozumler.html" class="hover:text-yellow-400">Çözümler</a></li>
+                    </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white uppercase tracking-wider">İlgili SKA</h4>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-emerald-700 flex items-center justify-center font-bold text-xl rounded-lg border-2 border-emerald-500">13</div>
+                        <p class="text-sm text-emerald-100">Sürdürülebilir Kalkınma Amacı: İklim Eylemi</p>
+                    </div>
+                    <p class="text-xs text-yellow-400 font-bold">#KampüsİklimEylemi2025</p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-emerald-400 space-y-4 md:space-y-0">
+                <p>&copy; 2025 Tüm Hakları Saklıdır. Bu bir üniversite ödev projesidir.</p>
+                <div class="flex space-x-6">
+                    <span>Tarih: Aralık 2025</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('cozumGrafigi').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Bitkisel Beslenme', 'Araba Yerine Bisiklet', 'Sıfır Atık Yaşam', 'Enerji Tasarrufu'],
+                datasets: [{
+                    label: 'Yıllık Karbon Tasarrufu (%)',
+                    data: [45, 60, 30, 25],
+                    backgroundColor: ['#10b981', '#059669', '#047857', '#064e3b'],
+                    borderRadius: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true, max: 100 } }
+            }
+        });
+    </script>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hedef Hakkında - İklim Eylemi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* --- Kaydırmada Ortaya Çıkma (Scroll Reveal) Animasyonu --- */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+        body { font-family: 'Inter', sans-serif; background-color: #f7fdee; }
+        .text-neon-green { color: #10b981; }
+        .bg-vibrant-green { background-color: #059669; }
+        .nav-bg { background-color: #047857; transition: background-color 0.3s ease; }
+        .animated-btn { position: relative; overflow: hidden; transition: all 0.3s ease; transform: translateZ(0); }
+        .animated-btn::after { content: ''; position: absolute; top: 50%; left: 50%; width: 5px; height: 5px; background: rgba(255, 255, 255, 0.6); opacity: 0; border-radius: 50%; transform: translate(-50%, -50%); transition: all 0.5s ease-out; }
+        .animated-btn:hover::after { width: 300%; height: 300%; opacity: 1; }
+        .fade-in-up { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
+        .nav-link:hover { transform: scale(1.05); box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); background-color: #065f46; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Navigasyon Çubuğu -->
+    <nav class="nav-bg sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo/Site Adı -->
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-3xl font-extrabold text-white tracking-wider hover:text-yellow-300 transition duration-300">İKLİM <span class="text-yellow-300">EYLEMİ</span></a>
+                </div>
+                <!-- Menü Bağlantıları (Masaüstü) -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-2 lg:space-x-4">
+                        <a href="index.html" class="nav-link text-white bg-green-700 px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out transform">Ana Sayfa</a>
+                        <!-- LİNKLER: Sayfalar/klasörü altındaki dosyalara yönlendiriyor -->
+                        <a href="hedef.html" class="nav-link text-gray-100 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out transform">Hedef Hakkında</a>
+                        <a href="sorunlar.html" class="nav-link text-gray-100 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out transform">Sorunlar</a>
+                        <a href="cozumler.html" class="nav-link text-gray-100 hover:text-white px-3 py-2 rounded-lg text-sm font-medium transition duration-300 ease-in-out transform">Çözümler</a>
+                        <a href="uni.html" class="nav-link text-yellow-300 hover:text-white px-3 py-2 rounded-lg text-sm font-bold transition duration-300 ease-in-out transform border-2 border-yellow-300 hover:border-white">Üniversitemizde Durum</a>
+                    </div>
+                </div>
+                <!-- Mobil Menü Butonu -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" type="button" class="bg-green-700 inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-green-800 focus:ring-white transition duration-150" aria-controls="mobile-menu" aria-expanded="false">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobil Menü İçeriği -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-green-800">
+                <a href="index.html" class="text-white bg-green-700 block px-3 py-2 rounded-md text-base font-medium transition duration-150">Ana Sayfa</a>
+                <a href="hedef.html" class="text-gray-200 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-150">Hedef Hakkında</a>
+                <a href="sorunlar.html" class="text-gray-200 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-150">Sorunlar</a>
+                <a href="cozumler.html" class="text-gray-200 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition duration-150">Çözümler</a>
+                <a href="uni.html" class="text-yellow-300 hover:bg-green-700 hover:text-white block px-3 py-2 rounded-md text-base font-bold transition duration-150">Üniversitemizde Durum</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <section class="fade-in-up bg-white rounded-3xl shadow-xl overflow-hidden mb-10">
+            <div class="bg-vibrant-green p-8 text-white">
+                <h1 class="text-4xl font-extrabold tracking-tight">Gezegenimiz İçin Kritik Eşik: 2025</h1>
+                <p class="mt-2 text-green-100">SKA 13: İklim Eylemi Neden Bugün Her Zamankinden Daha Önemli?</p>
+            </div>
+            
+            <div class="p-8 space-y-6 text-gray-700 leading-relaxed">
+                <p class="text-xl font-medium text-green-800">
+                    2025 yılı itibarıyla iklim değişikliği artık bir gelecek projeksiyonu değil, günlük hayatımızın sert bir gerçeğidir.
+                </p>
+                <p>
+                    Dünya Meteoroloji Örgütü'nün 2025 başı raporlarına göre, küresel sıcaklık artışı sanayi öncesi döneme kıyasla kritik <b>1.5°C sınırına</b> dayanmıştır. Bu durum, sadece buzulların erimesi değil; gıda güvenliği, temiz su erişimi ve aşırı hava olaylarının sıradanlaşması demektir.
+                </p>
+
+                <div class="my-10 p-6 bg-gray-50 rounded-2xl border border-gray-200 shadow-inner">
+                    <h3 class="text-center text-lg font-bold text-gray-800 mb-2">Küresel Isınma Şeritleri (1850 - 2025)</h3>
+                    <p class="text-sm text-center text-gray-500 mb-6 italic">Mavi çizgiler soğuk, kırmızı çizgiler ise rekor sıcaklık yıllarını temsil eder.</p>
+                    <div class="relative h-64 w-full">
+                        <canvas id="warmingStripesChart"></canvas>
+                    </div>
+                </div>
+
+                <p>
+                    Hedefimiz, sürdürülebilir bir gelecek için karbon emisyonlarını 2030 yılına kadar %45 oranında azaltmak ve 2050'de "Net Sıfır" hedefine ulaşmaktır. Üniversite gençliği olarak bizler, bu dönüşümün en güçlü savunucularıyız.
+                </p>
+            </div>
+        </section>
+    </div>
+</main>
+    <footer class="bg-emerald-900 text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-emerald-800 pb-10">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-black italic text-yellow-400">İKLİM EYLEMİ</h3>
+                    <p class="text-emerald-200 text-sm leading-relaxed">
+                        "Geleceği Isıtma, Eyleme Geç!" sloganıyla 2025 yılında daha yaşanabilir bir kampüs ve dünya!
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white uppercase tracking-wider">Site Haritası</h4>
+                    <ul class="text-emerald-300 text-sm space-y-2">
+                        <li><a href="index.html" class="hover:text-yellow-400">Ana Sayfa</a></li>
+                        <li><a href="hedef.html" class="hover:text-yellow-400">Hedef Hakkında</a></li>
+                        <li><a href="sorunlar.html" class="hover:text-yellow-400">Sorunlar</a></li>
+                        <li><a href="uni.html" class="hover:text-yellow-400">Üniverstemizde Durum</a></li>
+                        <li><a href="cozumler.html" class="hover:text-yellow-400">Çözümler</a></li>
+                    </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white uppercase tracking-wider">İlgili SKA</h4>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-emerald-700 flex items-center justify-center font-bold text-xl rounded-lg border-2 border-emerald-500">13</div>
+                        <p class="text-sm text-emerald-100">Sürdürülebilir Kalkınma Amacı: İklim Eylemi</p>
+                    </div>
+                    <p class="text-xs text-yellow-400 font-bold">#KampüsİklimEylemi2025</p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-emerald-400 space-y-4 md:space-y-0">
+                <p>&copy; 2025 Tüm Hakları Saklıdır. Bu bir üniversite ödev projesidir.</p>
+                <div class="flex space-x-6">
+                    <span>Tarih: Aralık 2025</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+            const contentSection = document.querySelector('.fade-in-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px', threshold: 0.1 });
+
+            if (contentSection) { observer.observe(contentSection); }
+        });
+    </script>
+    <script>
+    const ctx = document.getElementById('warmingStripesChart').getContext('2d');
+    
+    // 1850'den 2025'e kadar yılları oluştur
+    const labels = Array.from({length: 176}, (_, i) => 1850 + i);
+    
+    // Renk paleti (Geçmişten günümüze ısınma etkisi)
+    const backgroundColors = labels.map((year) => {
+        if (year < 1900) return '#08306b'; // Koyu Mavi (Soğuk)
+        if (year < 1940) return '#4292c6'; // Açık Mavi
+        if (year < 1980) return '#deebf7'; // Beyaza yakın
+        if (year < 2000) return '#fcae91'; // Turuncu (Isınma başlangıcı)
+        if (year < 2015) return '#fb6a4a'; // Kırmızı
+        if (year < 2024) return '#cb181d'; // Koyu Kırmızı
+        return '#67000d'; // 2025 (Kritik Seviye)
+    });
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: labels.map(() => 1), // Tüm çizgiler eşit boyda olsun
+                backgroundColor: backgroundColors,
+                borderWidth: 0,
+                barPercentage: 1.0,
+                categoryPercentage: 1.0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }, // Lejantı kapat
+                tooltip: {
+                    callbacks: {
+                        label: (context) => context.label + " Yılı Sıcaklık Anomalisi"
+                    }
+                }
+            },
+            scales: {
+                x: { display: false }, // Alt yazıları gizle (Şerit efekti için)
+                y: { display: false }
+            }
+        }
+    });
+</script>
+</body>
+</html>

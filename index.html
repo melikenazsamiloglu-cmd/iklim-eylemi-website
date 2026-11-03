@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Sayfa - İklim Eylemi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7fdee; }
+        .nav-bg { background-color: #047857; transition: background-color 0.3s ease; }
+
+        /* --- Slider Stil ve Animasyonlar --- */
+        .slider-container { position: relative; overflow: hidden; border-radius: 0.75rem; box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.2); background-color: #000; }
+        .slider-track { display: flex; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+        .slider-item { min-width: 100%; height: 500px; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; background-size: cover; background-position: center; }
+        
+        #slider-item-1 { background-image: url('resim1.jpg'); }
+        #slider-item-2 { background-image: url('resim2.jpg'); }
+        #slider-item-3 { background-image: url('resim3.jpg'); }
+
+        .image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%); z-index: 1; }
+        .slider-content { position: relative; z-index: 2; color: white; }
+        
+        @media (max-width: 768px) { .slider-item { height: 350px; } }
+        
+        .fade-in-up { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
+        .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
+
+        @keyframes bounce-slow { 0%, 100% { transform: translateY(-5%); } 50% { transform: translateY(0); } }
+        .animate-bounce-slow { animation: bounce-slow 5s infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <nav class="nav-bg sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-3xl font-extrabold text-white tracking-wider hover:text-yellow-300 transition duration-300">İKLİM <span class="text-yellow-300">EYLEMİ</span></a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="index.html" class="text-white bg-green-700 px-3 py-2 rounded-lg text-sm font-medium">Ana Sayfa</a>
+                        <a href="hedef.html" class="text-gray-100 hover:text-white px-3 py-2 rounded-lg text-sm font-medium">Hedef Hakkında</a>
+                        <a href="sorunlar.html" class="text-gray-100 hover:text-white px-3 py-2 rounded-lg text-sm font-medium">Sorunlar</a>
+                        <a href="cozumler.html" class="text-gray-100 hover:text-white px-3 py-2 rounded-lg text-sm font-medium">Çözümler</a>
+                        <a href="uni.html" class="text-yellow-300 border-2 border-yellow-300 px-3 py-2 rounded-lg text-sm font-bold">Üniversitemiz</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        <div class="max-w-7xl mx-auto py-8 sm:px-6 lg:px-8">
+            
+            <div class="text-center mb-12 fade-in-up">
+                <h1 class="text-4xl font-extrabold text-gray-800">İklim Eylemi Sitemize Hoş Geldiniz</h1>
+                <p class="mt-2 text-emerald-700 italic">Geleceği Isıtma, Eyleme Geç!</p>
+            </div>
+
+            <section id="anasayfa-slider" class="relative fade-in-up mb-16">
+                <div class="slider-container max-w-6xl mx-auto">
+                    <div id="slider-track" class="slider-track">
+                        <div class="slider-item" id="slider-item-1">
+                            <div class="image-overlay"></div>
+                            <div class="slider-content p-8">
+                                <h3 class="text-4xl sm:text-6xl font-black mb-4">Küresel Hedefler</h3>
+                                <a href="hedef.html" class="bg-yellow-400 hover:bg-yellow-500 text-green-900 font-semibold py-3 px-8 rounded-full shadow-xl">Hedefleri İncele</a>
+                            </div>
+                        </div>
+                        <div class="slider-item" id="slider-item-2">
+                            <div class="image-overlay"></div>
+                            <div class="slider-content p-8">
+                                <h3 class="text-4xl sm:text-6xl font-black mb-4 animate-bounce-slow">Sürdürülebilir Çözümler</h3>
+                                <a href="cozumler.html" class="bg-yellow-400 hover:bg-yellow-500 text-green-900 font-semibold py-3 px-8 rounded-full shadow-xl">Çözümlere Git</a>
+                            </div>
+                        </div>
+                        <div class="slider-item" id="slider-item-3">
+                            <div class="image-overlay"></div>
+                            <div class="slider-content p-8">
+                                <h3 class="text-4xl sm:text-6xl font-black mb-4">Kampüs Raporu</h3>
+                                <a href="uni.html" class="bg-yellow-400 hover:bg-yellow-500 text-green-900 font-semibold py-3 px-8 rounded-full shadow-xl">Raporları Gör</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="prev-btn" class="absolute top-1/2 left-4 -translate-y-1/2 bg-black/50 p-3 rounded-full text-white z-10 hidden sm:block">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button id="next-btn" class="absolute top-1/2 right-4 -translate-y-1/2 bg-black/50 p-3 rounded-full text-white z-10 hidden sm:block">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                    <div id="dots-container" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10"></div>
+                </div>
+            </section>
+
+            <section class="flex justify-center items-center py-10 fade-in-up">
+                <div class="max-w-[480px] w-full px-4">
+                    <img src="afis.png" alt="Dünyayı Bugün Kurtar Afişi" class="w-full h-auto rounded-2xl shadow-2xl border-4 border-white">
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="bg-emerald-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-emerald-800 pb-10">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-black italic text-yellow-400">İKLİM EYLEMİ</h3>
+                    <p class="text-emerald-200 text-sm leading-relaxed">
+                        "Geleceği Isıtma, Eyleme Geç!" sloganıyla 2025 yılında daha yaşanabilir bir kampüs ve dünya!
+                    </p>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white uppercase tracking-wider">Site Haritası</h4>
+                    <ul class="text-emerald-300 text-sm space-y-2">
+                        <li><a href="index.html" class="hover:text-yellow-400">Ana Sayfa</a></li>
+                        <li><a href="hedef.html" class="hover:text-yellow-400">Hedef Hakkında</a></li>
+                        <li><a href="sorunlar.html" class="hover:text-yellow-400">Sorunlar</a></li>
+                        <li><a href="cozumler.html" class="hover:text-yellow-400">Çözümler</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white uppercase tracking-wider">İlgili SKA</h4>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-emerald-700 flex items-center justify-center font-bold text-xl rounded-lg border-2 border-emerald-500">13</div>
+                        <p class="text-sm text-emerald-100">Sürdürülebilir Kalkınma Amacı: İklim Eylemi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-emerald-400">
+                <p>&copy; 2025 Tüm Hakları Saklıdır. Bu bir üniversite ödev projesidir.</p>
+                <span>Tarih: Aralık 2025</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('mobile-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            if(btn) btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+            
+            const track = document.getElementById('slider-track');
+            const items = document.querySelectorAll('.slider-item');
+            const dotsContainer = document.getElementById('dots-container');
+            let currentIndex = 0;
+
+            items.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = `w-3 h-3 rounded-full bg-white cursor-pointer transition-all dot`;
+                dot.addEventListener('click', () => { currentIndex = i; updateSlider(); });
+                dotsContainer.appendChild(dot);
+            });
+            const dots = document.querySelectorAll('.dot');
+
+            function updateSlider() {
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('bg-yellow-400', i === currentIndex);
+                    dot.classList.toggle('scale-125', i === currentIndex);
+                });
+            }
+
+            document.getElementById('next-btn').addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % items.length;
+                updateSlider();
+            });
+            document.getElementById('prev-btn').addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + items.length) % items.length;
+                updateSlider();
+            });
+
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % items.length;
+                updateSlider();
+            }, 5000);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+            
+            updateSlider();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Üniversitemiz - Anket Analizi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .nav-bg { background-color: #047857; }
+        .card { background: white; border-radius: 1rem; shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); border-top: 4px solid #047857; height: 100%; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <nav class="nav-bg sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between font-bold text-white">
+            <a href="index.html" class="text-2xl italic">İKLİM <span class="text-yellow-400">EYLEMİ</span></a>
+            <div class="hidden md:flex space-x-6 text-sm uppercase">
+                <a href="index.html" class="hover:text-yellow-400 transition">Ana Sayfa</a>
+                <a href="hedef.html" class="hover:text-yellow-400 transition">Hedefler</a>
+                <a href="sorunlar.html" class="hover:text-yellow-400 transition">Sorunlar</a>
+                <a href="cozumler.html" class="hover:text-yellow-400 transition">Çözümler</a>
+                <a href="uni.html" class="text-yellow-400 border-b-2 border-yellow-400">Üniversitemiz</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow py-12 px-4 max-w-7xl mx-auto w-full">
+        
+        <div class="text-center mb-12 fade-in-up">
+            <h1 class="text-4xl font-black text-slate-900 mb-2">Kampüs Sürdürülebilirlik Raporu</h1>
+            <p class="text-lg text-emerald-700 italic">Öğrenci Anketi Veri Analizi</p>
+            <p class="text-sm text-slate-600 mt-3 max-w-3xl mx-auto">Grafikler, Google Forms ile toplanan <strong>28 öğrenci yanıtından</strong> hesaplanan kişi sayılarını göstermektedir. Bu çalışma, tüm üniversite öğrencilerini temsil eden bir örneklem olarak değerlendirilmemelidir.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            
+            <div class="card p-6 fade-in-up">
+                <h3 class="font-bold text-slate-800 mb-4 text-center text-sm">Okula Ulaşım Yöntemleri</h3>
+                <canvas id="transportChart"></canvas>
+            </div>
+
+            <div class="card p-6 fade-in-up">
+                <h3 class="font-bold text-slate-800 mb-4 text-center text-sm">İklim Değişikliği Endişe Seviyesi</h3>
+                <canvas id="concernChart"></canvas>
+            </div>
+
+            <div class="card p-6 fade-in-up">
+                <h3 class="font-bold text-slate-800 mb-4 text-center text-sm">Geri Dönüşüm Kutusu Yeterliliği</h3>
+                <canvas id="recyclingChart"></canvas>
+            </div>
+
+            <div class="card p-6 fade-in-up">
+                <h3 class="font-bold text-slate-800 mb-4 text-center text-sm">İklim Krizinin Temel Nedeni</h3>
+                <canvas id="reasonChart"></canvas>
+            </div>
+
+            <div class="card p-6 fade-in-up">
+                <h3 class="font-bold text-slate-800 mb-4 text-center text-sm">Okul Yönetimi Çevre Puanı</h3>
+                <canvas id="managementChart"></canvas>
+            </div>
+
+            <div class="card p-6 fade-in-up">
+                <h3 class="font-bold text-slate-800 mb-4 text-center text-sm">Derslerde SKA İşlenme Oranı</h3>
+                <canvas id="educationChart"></canvas>
+            </div>
+
+        </div>
+
+        <div class="card p-8 mb-12 fade-in-up">
+            <h3 class="text-xl font-black text-emerald-900 mb-6">Kampüs İçin İyileştirme Önerileri</h3>
+            <p class="text-sm text-slate-600 mb-6">Aşağıdakiler, ankette ele alınan sorunlardan hareketle hazırlanan tematik önerilerdir; birebir öğrenci alıntısı değildir.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 bg-slate-50 rounded-lg border-l-4 border-emerald-500 text-sm">
+                    "Geri dönüşüm kutularının sayısı ve erişilebilirliği tüm binalarda arttırılmalıdır."
+                </div>
+                <div class="p-4 bg-slate-50 rounded-lg border-l-4 border-emerald-500 text-sm">
+                    "Kampüs genelinde ağaçlandırma faaliyetleri ve yeşil alan bakımları sıklaştırılmalıdır."
+                </div>
+                <div class="p-4 bg-slate-50 rounded-lg border-l-4 border-emerald-500 text-sm">
+                    "Ders içeriklerinde sürdürülebilirlik ve iklim değişikliği konularına daha fazla yer verilmelidir."
+                </div>
+                <div class="p-4 bg-slate-50 rounded-lg border-l-4 border-emerald-500 text-sm">
+                    "Enerji tasarrufu için dersliklerdeki gereksiz aydınlatmalar denetlenmelidir."
+                </div>
+            </div>
+        </div>
+        <section class="max-w-4xl mx-auto my-16 px-4 fade-in-up">
+    <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border-t-8 border-yellow-400">
+        <div class="p-8 md:p-12">
+            <h3 class="text-3xl font-black text-emerald-900 mb-2 text-center">Kampüs Görüş Formu</h3>
+            <p class="text-emerald-600 text-center mb-10 font-medium">Fikirlerin bizim için değerli, formu doldurarak bize iletebilirsin.</p>
+            
+            <form action="#" method="POST" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-emerald-800 mb-2">Adınız Soyadınız</label>
+                        <input type="text" placeholder="Örn: Ahmet Yılmaz" class="w-full px-5 py-3 rounded-xl border-2 border-emerald-100 focus:border-yellow-400 focus:outline-none transition duration-300 bg-gray-50">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-emerald-800 mb-2">E-posta Adresiniz</label>
+                        <input type="email" placeholder="Örn: ahmet@universite.edu.tr" class="w-full px-5 py-3 rounded-xl border-2 border-emerald-100 focus:border-yellow-400 focus:outline-none transition duration-300 bg-gray-50">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-emerald-800 mb-2">Görüş Kategorisi</label>
+                    <select class="w-full px-5 py-3 rounded-xl border-2 border-emerald-100 focus:border-yellow-400 focus:outline-none transition duration-300 bg-gray-50">
+                        <option>Enerji Tasarrufu</option>
+                        <option>Atık Yönetimi / Geri Dönüşüm</option>
+                        <option>Yeşil Alanların Korunması</option>
+                        <option>Diğer Öneriler</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-emerald-800 mb-2">Mesajınız / Öneriniz</label>
+                    <textarea rows="5" placeholder="Kampüsümüzü daha yeşil yapmak için neler yapabiliriz?" class="w-full px-5 py-3 rounded-xl border-2 border-emerald-100 focus:border-yellow-400 focus:outline-none transition duration-300 bg-gray-50 resize-none"></textarea>
+                </div>
+
+                <div class="text-center">
+                    <button type="button" onclick="alert('Teşekkürler! Mesajınız başarıyla iletildi (Simülasyon).')" class="bg-emerald-700 hover:bg-emerald-800 text-white font-black py-4 px-12 rounded-full shadow-lg transition duration-300 transform hover:scale-105 uppercase tracking-widest text-sm">
+                        Görüşümü Gönder
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <footer class="bg-emerald-900 text-white py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-emerald-800 pb-10">
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-black italic text-yellow-400">İKLİM EYLEMİ</h3>
+                    <p class="text-emerald-200 text-sm leading-relaxed">
+                        "Geleceği Isıtma, Eyleme Geç!" sloganıyla 2025 yılında daha yaşanabilir bir kampüs ve dünya!
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white uppercase tracking-wider">Site Haritası</h4>
+                    <ul class="text-emerald-300 text-sm space-y-2">
+                        <li><a href="index.html" class="hover:text-yellow-400">Ana Sayfa</a></li>
+                        <li><a href="hedef.html" class="hover:text-yellow-400">Hedef Hakkında</a></li>
+                        <li><a href="sorunlar.html" class="hover:text-yellow-400">Sorunlar</a></li>
+                        <li><a href="uni.html" class="hover:text-yellow-400">Üniverstemizde Durum</a></li>
+                        <li><a href="cozumler.html" class="hover:text-yellow-400">Çözümler</a></li>
+                    </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white uppercase tracking-wider">İlgili SKA</h4>
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-emerald-700 flex items-center justify-center font-bold text-xl rounded-lg border-2 border-emerald-500">13</div>
+                        <p class="text-sm text-emerald-100">Sürdürülebilir Kalkınma Amacı: İklim Eylemi</p>
+                    </div>
+                    <p class="text-xs text-yellow-400 font-bold">#KampüsİklimEylemi2025</p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex flex-col md:flex-row justify-between items-center text-xs text-emerald-400 space-y-4 md:space-y-0">
+                <p>&copy; 2025 Tüm Hakları Saklıdır. Bu bir üniversite ödev projesidir.</p>
+                <div class="flex space-x-6">
+                    <span>Tarih: Aralık 2025</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('is-visible'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in-up').forEach(s => observer.observe(s));
+
+            const opt = { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } } };
+
+            new Chart(document.getElementById('transportChart'), {
+                type: 'pie',
+                data: { labels: ['Bisiklet/Yürüyüş', 'Servis', 'Toplu Taşıma', 'Şahsi Araç'], datasets: [{ data: [10, 7, 8, 3], backgroundColor: ['#059669', '#34d399', '#fbbf24', '#ef4444'] }] },
+                options: opt
+            });
+
+            new Chart(document.getElementById('concernChart'), {
+                type: 'bar',
+                data: { labels: ['1', '2', '3', '4', '5'], datasets: [{ label: 'Endişe Puanı', data: [1, 3, 9, 6, 9], backgroundColor: '#10b981' }] }
+            });
+
+            new Chart(document.getElementById('recyclingChart'), {
+                type: 'doughnut',
+                data: { labels: ['Yetersiz', 'Görmedim', 'Yerleri uygun değil', 'Kesinlikle yeterli'], datasets: [{ data: [21, 5, 1, 1], backgroundColor: ['#dc2626', '#f59e0b', '#fde047', '#10b981'] }] },
+                options: opt
+            });
+
+            new Chart(document.getElementById('reasonChart'), {
+                type: 'pie',
+                data: { labels: ['Ormansızlaşma', 'Fosil Yakıt', 'Sanayi', 'Bireysel Tüketim', 'Fikrim Yok'], datasets: [{ data: [9, 9, 5, 2, 3], backgroundColor: ['#15803d', '#1e40af', '#b91c1c', '#64748b', '#94a3b8'] }] },
+                options: opt
+            });
+
+            new Chart(document.getElementById('managementChart'), {
+                type: 'bar',
+                data: { labels: ['1', '2', '3', '4', '5'], datasets: [{ label: 'Yönetim Puanı', data: [9, 6, 10, 3, 0], backgroundColor: '#047857' }] }
+            });
+
+            new Chart(document.getElementById('educationChart'), {
+                type: 'pie',
+                data: { labels: ['Bahsedilmiyor', 'Nadir', 'Sıkça'], datasets: [{ data: [15, 11, 2], backgroundColor: ['#7c2d12', '#f97316', '#facc15'] }] },
+                options: opt
+            });
+        });
+    </script>
+</body>
+</html>
