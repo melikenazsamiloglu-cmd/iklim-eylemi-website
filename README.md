@@ -32,7 +32,7 @@
 - Chart.js ile grafik çizimleri
 - Kampüs görüş formu için **simülasyon arayüzü**
 - Google Forms ile toplanan **28 öğrenci yanıtına dayalı** altı veri grafiği
-- Katılımcıların kimliğini açığa çıkarmayan, toplulaştırılmış anket özet dosyası (`data/anket-ozeti.csv`)
+- Katılımcıların kimliğini açığa çıkarmayan, toplulaştırılmış anket özet dosyası (`anket-ozeti.csv`)
 
 ## Çalıştırma
 
@@ -49,14 +49,14 @@ Ayrıca GitHub Pages üzerinden **Settings → Pages → Deploy from a branch �
 - **Katılımcı:** 28 öğrenci yanıtı
 - **İncelenen temalar:** ulaşım tercihi, iklim değişikliği endişesi, geri dönüşüm olanakları, iklim krizinin nedenleri, yönetim uygulamalarının değerlendirilmesi, derslerde sürdürülebilirlik
 - **Örnek bulgular:** 21 katılımcı geri dönüşüm kutularını yetersiz, 5 katılımcı ise hiç kutu görmediğini belirtmiştir. Sürdürülebilirlik konularının derslerde hiç ele alınmadığını belirten 15, çok nadiren ele alındığını belirten 11 öğrenci vardır.
-- **Veri kaynağı:** `data/anket-ozeti.csv` (anonim, toplulaştırılmış)
-- **Yöntem ve sınırlamalar:** `data/anket-yontemi.md`
+- **Veri kaynağı:** `anket-ozeti.csv` (anonim, toplulaştırılmış)
+- **Yöntem ve sınırlamalar:** `anket-yontemi.md`
 
 Bireysel anket yanıtları ve zaman damgaları gizliliği korumak için yayımlanmamıştır.
 
 ## Veri ve işlev sınırları
 
-> **Önemli:** `uni.html` üzerindeki altı grafik, Google Forms üzerinden elde edilen **28 öğrenci yanıtından** yeniden hesaplanarak düzeltildi. Grafiklerdeki sayılar sabit (statik) tutulur; ancak kaynağı ve hesaplama yöntemi `data/anket-ozeti.csv` ve `data/anket-yontemi.md` dosyalarında belgelenmiştir. Bu sonuçlar sadece katılımcıların görüşlerini yansıtır, üniversitenin tüm öğrencilerini temsil etmez.
+> **Önemli:** `uni.html` üzerindeki altı grafik, Google Forms üzerinden elde edilen **28 öğrenci yanıtından** yeniden hesaplanarak düzeltildi. Grafiklerdeki sayılar sabit (statik) tutulur; ancak kaynağı ve hesaplama yöntemi `anket-ozeti.csv` ve `anket-yontemi.md` dosyalarında belgelenmiştir. Bu sonuçlar sadece katılımcıların görüşlerini yansıtır, üniversitenin tüm öğrencilerini temsil etmez.
 
 - Isınma şeritlerinin renkleri kod içinde dönemlere göre belirlenmiştir; bunlar yıllık ölçülmüş sıcaklık anomalilerinin doğrudan görselleştirilmesi değildir.
 - Kampüs görüş formu, `type="button"` ile bir bilgilendirme penceresi açar; veri göndermez veya kaydetmez.
